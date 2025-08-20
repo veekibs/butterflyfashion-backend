@@ -17,6 +17,17 @@ class Product(models.Model):
     # A field to categorise the product, with predefined choices for "preteen" or "teen"
     category = models.CharField(max_length=50, choices=[('preteen', 'Preteen'), ('teen', 'Teen')])
 
+    is_new_arrival = models.BooleanField(default=False)
+    class SubCategory(models.TextChoices):
+        TOP = 'top', 'Top'
+        BOTTOM = 'bottom', 'Bottom'
+    
+    sub_category = models.CharField(
+        max_length=50,
+        choices=SubCategory.choices,
+        default=SubCategory.TOP, 
+    )
+    
     # Helper function that tells Django what to display when a Product object is printed
     # In this case, it will just show the product's name!
     def __str__(self):
